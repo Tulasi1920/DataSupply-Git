@@ -12,6 +12,8 @@ let ForFile = ({ inFolderName, inFileNameWithExtension, inUserPK }) => {
 
         if (fs.existsSync(LocalReturnData.FilePath)) {
             LocalReturnData.KTF = true;
+        } else {
+            LocalReturnData.KReason = `${inFileNameWithExtension} : file not found in config/${inFolderName}`;
         };
     } else {
         LocalReturnData.KReason = LocalFolderInfo.KReason;
@@ -22,6 +24,7 @@ let ForFile = ({ inFolderName, inFileNameWithExtension, inUserPK }) => {
 
 let InConfig = ({ inFolderName, inFileNameOnly, inUserPK }) => {
     let LocalReturnData = { KTF: false, DirCreate: "", CreatedLog: {} };
+
     let LocalFolderInfo = CommonFolder.ForConfig({ inFolderName, inUserPK });
     LocalReturnData.DirPath = LocalFolderInfo.DirPath;
     LocalReturnData.FolderPath = `${LocalReturnData.DirPath}/${inFileNameOnly}`;
@@ -31,7 +34,9 @@ let InConfig = ({ inFolderName, inFileNameOnly, inUserPK }) => {
     if (LocalFolderInfo.KTF) {
         if (fs.existsSync(LocalReturnData.FilePath)) {
             LocalReturnData.KTF = true;
-        };
+        } else {
+            LocalReturnData.KReason = `${inFileNameOnly} : folder name not found in : config/${inFolderName}`; ``
+        }
     };
 
     return LocalReturnData;

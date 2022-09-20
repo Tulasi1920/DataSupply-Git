@@ -9,6 +9,7 @@ let StartFunc = async ({ inFolderName, inFileNameOnly, inUserPK }) => {
         LocalReturnData.FolderPath = `${LocalReturnData.DirPath}/${inFileNameOnly}`;
         LocalReturnData.FilePath = `${LocalReturnData.FolderPath}/Display.json`;
         LocalReturnData.ReturnDataPath = `${LocalReturnData.FolderPath}/ReturnData.json`;
+        
         if (LocalFolderInfo.KTF) {
             if (fs.existsSync(LocalReturnData.FolderPath)) {
                 if (fs.statSync(LocalReturnData.FolderPath).isDirectory()) {

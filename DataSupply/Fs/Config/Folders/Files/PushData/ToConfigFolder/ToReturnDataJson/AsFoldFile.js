@@ -1,22 +1,20 @@
-let CommonCheck = require("../../../Check");
+let CommonCheck = require("../../../Check/InReturnDataJson");
 let path = require("path");
 
 let fs = require("fs");
 
-let AsAsync = async ({ inFolderName, inJsonFileName, inUserPK, inOriginalData, inDataToUpdate }) => {
+let AsAsync = async ({ inFolderName, inJsonFileName, inDataPK, inOriginalData, inDataToUpdate }) => {
     let LocalReturnData = { KTF: false };
 
-    if (inUserPK > 0) {
+    if (inDataPK > 0) {
         let LocalFolderName = inFolderName;
         let LocalJsonFileName = inJsonFileName;
-        //let LocalJsonFileNameOnly = LocalJsonFileName.split(".")[0];
-        console.log("LocalJsonFileName : ", LocalJsonFileName);
         let LocalFilePath;
 
-        let LocalDataFromCommonCreate = CommonCheck.InConfig({
+        let LocalDataFromCommonCreate = CommonCheck.StartFunc({
             inFolderName: LocalFolderName,
             inFileNameOnly: path.parse(LocalJsonFileName).name,
-            inUserPK
+            inUserPK: inDataPK
         });
 
         if (LocalDataFromCommonCreate.KTF) {

@@ -3,13 +3,20 @@ let CommonToDisplayFolder = require("./ToDisplayFolder");
 let CommonToReturnDataJson = require("./ToReturnDataJson");
 
 let InsertNew = async ({ inFolderName, inFileName, inUserPK }) => {
-    let LocalReturnData = { KTF: false };
+    let LocalReturnData = {
+        KTF: false, FormDataFolder: {}, FromConfigFolder: {},
+        FromReturnDataJson: {}
+    };
+
+    let LocalRetrunFromConfig;
+    let LocalFromToReturnDataJson;
+
     let LocalReturnFromData = await CommonToDataFolder.CreateDataFolder({
         inFolderName,
         inFileNameWithExtension: inFileName, inUserPK
     });
-    let LocalRetrunFromConfig;
-    let LocalFromToReturnDataJson;
+
+    LocalReturnData.FormDataFolder = LocalReturnFromData;
 
     if (LocalReturnFromData.KTF) {
         LocalRetrunFromConfig = await CommonToDisplayFolder.CreateConfigFolder({
@@ -17,13 +24,19 @@ let InsertNew = async ({ inFolderName, inFileName, inUserPK }) => {
             inFileNameWithExtension: inFileName, inUserPK
         });
 
+        LocalReturnData.FromConfigFolder = LocalRetrunFromConfig;
+
         if (LocalRetrunFromConfig.KTF) {
             LocalReturnData.KTF = true;
 
             LocalFromToReturnDataJson = await CommonToReturnDataJson.StartFunc({
                 inFolderName,
-                inFileNameWithExtension: inFileName, inUserPK
+                inFileNameWithExtension: inFileName,
+                inContent: {},
+                inUserPK
             });
+
+            LocalReturnData.FromReturnDataJson = LocalFromToReturnDataJson;
 
             if (LocalRetrunFromConfig.KTF) {
                 LocalReturnData.KTF = true;
@@ -33,5 +46,20 @@ let InsertNew = async ({ inFolderName, inFileName, inUserPK }) => {
 
     return await LocalReturnData;
 };
+
+let MockFuncFoldFileItem = async ({ inFolderName, inFileNameWithExtension, inDataPK }) => {
+    return await InsertNew({
+        inFolderName,
+        inFileName: inFileNameWithExtension,
+        inUserPK: inDataPK
+    });
+};
+
+MockFuncFoldFileItem({
+    inFolderName: "Masters", inFileNameWithExtension: "f17.json",
+    inDataPK: 1018
+}).then(p => {
+    console.log("P : ", p.KTF);
+});
 
 module.exports = { InsertNew };

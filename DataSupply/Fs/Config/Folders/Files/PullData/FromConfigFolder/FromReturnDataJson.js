@@ -21,7 +21,7 @@ let UsingJsonConfigAsync = async ({ inJsonConfig, inDataPK }) => {
         LocalReturnObject.FolderPath = LocalFromCheck.FolderPath;
         LocalReturnObject.FilePath = LocalFromCheck.FilePath;
         LocalReturnObject.ReturnDataPath = LocalFromCheck.ReturnDataPath;
-        
+
         if (LocalFromCheck.KTF) {
             LocalReturnObject.KTF = true;
             LocalFilePath = LocalFromCheck.ReturnDataPath;
@@ -36,9 +36,10 @@ let UsingJsonConfigAsync = async ({ inJsonConfig, inDataPK }) => {
 
 let UsingFolderAndFileNameAsync = async ({ inFolderName, inFileNameWithExtension, inDataPK }) => {
     let LocalDataPK = inDataPK;
+    let LocalReturnData = { KTF: false };
 
     if (LocalDataPK > 0) {
-        let LocalReturnData;
+
         let LocalDataFromCommonCreate;
         let LocalDataFromJSON;
         let LocalFolderName = inFolderName;
@@ -49,14 +50,18 @@ let UsingFolderAndFileNameAsync = async ({ inFolderName, inFileNameWithExtension
             inFolderName: LocalFolderName,
             inFileNameOnly: path.parse(LocalFileNameWithExtension).name, inDataPK: LocalDataPK
         });
-        if (LocalDataFromCommonCreate.KTF) {
-            LocalFilePath = LocalDataFromCommonCreate.ReturnDataPath
-            LocalDataFromJSON = await fs.readFileSync(LocalFilePath);
-            LocalReturnData = JSON.parse(LocalDataFromJSON);
-            Object.freeze(LocalReturnData);
+        
+        if (LocalDataFromCommonCreate.KTF === false) {
+            LocalReturnData.KReason = LocalDataFromCommonCreate.KReason;
+            return await LocalReturnData;
         };
-        return await LocalReturnData;
+
+        LocalFilePath = LocalDataFromCommonCreate.ReturnDataPath
+        LocalDataFromJSON = await fs.readFileSync(LocalFilePath);
+        LocalReturnData.JsonData = JSON.parse(LocalDataFromJSON);
     };
+
+    return await LocalReturnData;
 };
 
 module.exports = {
