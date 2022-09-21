@@ -4,6 +4,7 @@ let fs = require("fs");
 
 let FromFoldFile = async ({ inFolderName, inFileNameWithExtension, inDataPK }) => {
     let LocalDataPK = inDataPK;
+    
     let LocalReturnObject = {
         KTF: false,
         JsonData: {}

@@ -56,7 +56,7 @@ let MockFuncFoldFileItem = async ({ inFolderName, inFileNameWithExtension, inDat
 };
 
 MockFuncFoldFileItem({
-    inFolderName: "Masters", inFileNameWithExtension: "f17.json",
+    inFolderName: "Masters", inFileNameWithExtension: "f1.json",
     inDataPK: 1018
 }).then(p => {
     console.log("P : ", p.KTF);

@@ -9,21 +9,21 @@ let AsAsync = async ({ inFolderName, inJsonFileName, inDataPK, inOriginalData, i
     if (inDataPK > 0) {
         let LocalFolderName = inFolderName;
         let LocalJsonFileName = inJsonFileName;
-        let LocalFilePath;
+        let LocalReturnDataPath;
 
-        let LocalDataFromCommonCreate = CommonCheck.StartFunc({
+        let LocalDataFromCommonCreate = await CommonCheck.StartFunc({
             inFolderName: LocalFolderName,
             inFileNameOnly: path.parse(LocalJsonFileName).name,
             inUserPK: inDataPK
         });
-
+        
         if (LocalDataFromCommonCreate.KTF) {
-            LocalFilePath = LocalDataFromCommonCreate.FilePath
+            LocalReturnDataPath = LocalDataFromCommonCreate.ReturnDataPath
 
             LocalCheckBeforeInsert({ inOriginalData, inDataToUpdate });
 
             try {
-                fs.writeFileSync(LocalFilePath, JSON.stringify(inDataToUpdate));
+                fs.writeFileSync(LocalReturnDataPath, JSON.stringify(inDataToUpdate));
                 LocalReturnData.KTF = true;
             } catch (err) {
             };

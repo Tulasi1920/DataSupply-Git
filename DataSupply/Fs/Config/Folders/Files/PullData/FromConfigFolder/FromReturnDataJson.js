@@ -39,7 +39,6 @@ let UsingFolderAndFileNameAsync = async ({ inFolderName, inFileNameWithExtension
     let LocalReturnData = { KTF: false };
 
     if (LocalDataPK > 0) {
-
         let LocalDataFromCommonCreate;
         let LocalDataFromJSON;
         let LocalFolderName = inFolderName;
@@ -50,7 +49,7 @@ let UsingFolderAndFileNameAsync = async ({ inFolderName, inFileNameWithExtension
             inFolderName: LocalFolderName,
             inFileNameOnly: path.parse(LocalFileNameWithExtension).name, inDataPK: LocalDataPK
         });
-        
+
         if (LocalDataFromCommonCreate.KTF === false) {
             LocalReturnData.KReason = LocalDataFromCommonCreate.KReason;
             return await LocalReturnData;
@@ -59,6 +58,7 @@ let UsingFolderAndFileNameAsync = async ({ inFolderName, inFileNameWithExtension
         LocalFilePath = LocalDataFromCommonCreate.ReturnDataPath
         LocalDataFromJSON = await fs.readFileSync(LocalFilePath);
         LocalReturnData.JsonData = JSON.parse(LocalDataFromJSON);
+        LocalReturnData.KTF = true;
     };
 
     return await LocalReturnData;

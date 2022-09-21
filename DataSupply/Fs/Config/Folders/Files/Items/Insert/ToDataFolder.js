@@ -38,7 +38,7 @@ let FoldFileItem = async ({ inFolderName, inFileNameWithExtension, inToName, inD
         return await LocalReturnData;
     };
 
-    let LocalDataFromJSONObject = JSON.parse(JSON.stringify(LocalDataFromJSON));
+    let LocalDataFromJSONObject = JSON.parse(JSON.stringify(LocalDataFromJSON.KResult));
 
     if (inToName in LocalDataFromJSONObject === false) {
         LocalDataFromJSONObject[inToName] = {};

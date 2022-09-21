@@ -17,7 +17,7 @@ let CommonFuns = {
             return await LocalReturnData;
         };
 
-        let LocalDataFromJSONObject = JSON.parse(JSON.stringify(LocalDataFromJSON));
+        let LocalDataFromJSONObject = JSON.parse(JSON.stringify(LocalDataFromJSON.JsonData));
 
         if (inToName in LocalDataFromJSONObject === false) {
             LocalDataFromJSONObject[inToName] = {};
@@ -40,6 +40,7 @@ let CommonFuns = {
 
 let Insert = async ({ inFolderName, inFileNameWithExtension, inToName, inDataPK }) => {
     let LocalReturnData = { KTF: false, KResult: [] };
+
     let LocalReturnDataFromDisplay = await CommonFuns.ToDisplay({
         inFolderName, inFileNameWithExtension,
         inToName,
