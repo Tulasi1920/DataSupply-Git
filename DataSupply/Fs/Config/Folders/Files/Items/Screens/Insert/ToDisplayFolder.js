@@ -286,6 +286,7 @@ class TableColumnFuncs {
 };
 
 let Insert = async ({ inJsonConfig, inItemName, inScreenName, inUserPK }) => {
+
     let LocalReturnData = { KTF: false, LocalCreateItem: "" };
     let LocalNewColumnObject = CommonColumnJsonFuncs.TableColumn();
     let LocalNewTableInfoObject = CommonColumnJsonFuncs.TableInfo();
@@ -293,6 +294,7 @@ let Insert = async ({ inJsonConfig, inItemName, inScreenName, inUserPK }) => {
     let LocalScreenName = inScreenName;
 
     let LocalDataFromJSON = await CommonPullData.AsJsonAsync({ inJsonConfig, inUserPK });
+    
     let LocalDataFromJSONObject = JSON.parse(JSON.stringify(LocalDataFromJSON));
     let LocalDataWithItemScreen;
 

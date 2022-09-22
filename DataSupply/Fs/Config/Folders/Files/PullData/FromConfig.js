@@ -3,7 +3,6 @@ let path = require("path");
 let fs = require("fs");
 
 let AsJsonAsync = async ({ inJsonConfig, inUserPK }) => {
-    //console.log("inUserPK : ", inUserPK);
     if (inUserPK > 0) {
         let LocalReturnData;
         let LocalDataFromCommonCreate;
@@ -16,7 +15,7 @@ let AsJsonAsync = async ({ inJsonConfig, inUserPK }) => {
             inFolderName: LocalFolderName,
             inFileNameOnly: path.parse(LocalFileNameWithExtension).name, inUserPK
         });
-        
+
         if (LocalDataFromCommonCreate.KTF) {
             LocalFilePath = LocalDataFromCommonCreate.FilePath
             LocalDataFromJSON = await fs.readFileSync(LocalFilePath);
@@ -40,7 +39,7 @@ let FromFolderAndFile = async ({ inFolderName, inFileNameWithExtension, inUserPK
             inFolderName: LocalFolderName,
             inFileNameOnly: path.parse(LocalFileNameWithExtension).name, inUserPK
         });
-        
+
         if (LocalDataFromCommonCreate.KTF) {
             LocalFilePath = LocalDataFromCommonCreate.FilePath
             LocalDataFromJSON = await fs.readFileSync(LocalFilePath);
