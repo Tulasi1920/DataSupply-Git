@@ -40,6 +40,18 @@ let FromTemplate = async ({ inJsonConfig, inItemName, inUserPK, inFirstRow }) =>
     return await LocalReturnData;
 };
 
+let MockFuncInsert = async ({ inJsonConfig, inItemName, inScreenName, inUserPK }) => {
+    return await Insert({ inJsonConfig, inItemName, inScreenName, inUserPK });
+};
+
+MockFuncInsert({
+    inJsonConfig:{inFolderName: "Masters", inFileNameWithExtension: "f1.json"},
+    inItemName: "Item1",inScreenName:"Create", inDataPK: 1018
+}).then(p => {
+    console.log("P : ", p);
+});
+
+
 module.exports = {
     Insert, InsertWithKPk,
     FromTemplate
