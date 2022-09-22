@@ -85,8 +85,6 @@ let LocalMockFunc = async () => {
         inFolderName: "Transactions",
         inDataPK: 1024
     });
-
-    console.log("LocalMockFunc : ", LocalData.ReturnArray.length, LocalData.ReturnArray[0]);
 };
 
 //LocalMockFunc().then(p => { p })

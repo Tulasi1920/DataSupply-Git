@@ -45,12 +45,11 @@ let MockFuncInsert = async ({ inJsonConfig, inItemName, inScreenName, inDataPK }
 };
 
 MockFuncInsert({
-    inJsonConfig: { inFolderName: "Masters", inJsonFileName: "f1.json" },
+    inJsonConfig: { inFolderName: "Masters", inJsonFileName: "f2.json" },
     inItemName: "Item1", inScreenName: "Create", inDataPK: 1018
 }).then(p => {
     console.log("P : ", p);
 });
-
 
 module.exports = {
     Insert, InsertWithKPk,

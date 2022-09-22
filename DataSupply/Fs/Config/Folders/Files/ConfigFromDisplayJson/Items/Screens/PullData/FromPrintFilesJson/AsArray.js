@@ -48,17 +48,6 @@ let MockFuncFromFolderFile = async () => {
     });
 };
 
-
-let MockFuncFromFolderFile1 = async () => {
-    return await ReturnArray({
-        inFolderName: "Masters",
-        inFileNameWithExtension: "Customers.json",
-        inItemName: "CustomerNames",
-        inItemName: "General Payments",
-        inDataPk: 1018
-    });
-};
-
 //MockFuncFromFolderFile().then(p => { console.log("p:", p) })
 
 module.exports = {

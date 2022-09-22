@@ -79,8 +79,6 @@ let AsArrayOfObjectsWithDesign = ({ inDataPK }) => {
 
 let LocalMockFunc = () => {
     let LocalData = StartFunc({ inDataPk: 1024 });
-
-    console.log("LocalMockFunc : ", LocalData);
 };
 
 module.exports = { StartFunc, AsArrayOfObjects, AsArrayOfObjectsWithDesign };
