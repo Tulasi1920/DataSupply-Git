@@ -3,7 +3,10 @@ let CommonToDisplayFolder = require("./ToDisplayFolder");
 
 let Insert = async ({ inJsonConfig, inItemName, inScreenName, inUserPK }) => {
     let LocalReturnData = { KTF: false, LocalCreateItem: "" };
-    let LocaFromDataFolder = await CommonToDisplayFolder.Insert({ inJsonConfig, inItemName, inScreenName, inUserPK });
+    let LocaFromDataFolder = await CommonToDisplayFolder.Insert({
+        inJsonConfig, inItemName, inScreenName,
+        inDataPK: inUserPK
+    });
 
     if (LocaFromDataFolder.KTF) {
         LocalReturnData.KTF = true;
@@ -44,12 +47,12 @@ let MockFuncInsert = async ({ inJsonConfig, inItemName, inScreenName, inDataPK }
     return await Insert({ inJsonConfig, inItemName, inScreenName, inUserPK: inDataPK });
 };
 
-MockFuncInsert({
-    inJsonConfig: { inFolderName: "Masters", inJsonFileName: "f2.json" },
-    inItemName: "Item1", inScreenName: "Create", inDataPK: 1018
-}).then(p => {
-    console.log("P : ", p);
-});
+// MockFuncInsert({
+//     inJsonConfig: { inFolderName: "Masters", inJsonFileName: "f1.json" },
+//     inItemName: "Item1", inScreenName: "Create", inDataPK: 1018
+// }).then(p => {
+//     console.log("P : ", p);
+// });
 
 module.exports = {
     Insert, InsertWithKPk,

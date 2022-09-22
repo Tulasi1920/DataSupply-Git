@@ -6,6 +6,8 @@ let CommonColumnJsonFuncs = require("../../../../../../../Fix/Json/SupplyJson");
 let CommonFromScreens = require("../../../../../../Templates/FromScreens");
 //const TableInfoObject = require('../../../../Fix/Json/TableInfo.json');
 
+let CommonPullDataFromConfigFolder = require("../../../PullData/FromConfigFolder/FromDisplayJson/AsJson");
+
 let CommonFuns = {
     ConfigureJson: {
         TableInfo: {
@@ -285,17 +287,24 @@ class TableColumnFuncs {
     }
 };
 
-let Insert = async ({ inJsonConfig, inItemName, inScreenName, inUserPK }) => {
-
+let Insert = async ({ inJsonConfig, inItemName, inScreenName, inDataPK }) => {
     let LocalReturnData = { KTF: false, LocalCreateItem: "" };
     let LocalNewColumnObject = CommonColumnJsonFuncs.TableColumn();
     let LocalNewTableInfoObject = CommonColumnJsonFuncs.TableInfo();
     let LocalReturnFromPush;
     let LocalScreenName = inScreenName;
 
-    let LocalDataFromJSON = await CommonPullData.AsJsonAsync({ inJsonConfig, inUserPK });
-    
-    let LocalDataFromJSONObject = JSON.parse(JSON.stringify(LocalDataFromJSON));
+    let LocalDataFromJSON = await CommonPullDataFromConfigFolder.FromJsonConfig({
+        inJsonConfig,
+        inDataPK
+    });
+
+    if (LocalDataFromJSON.KTF === false) {
+        LocalReturnData.KReason = LocalDataFromJSON.KReason;
+        return await LocalReturnData;
+    };
+
+    let LocalDataFromJSONObject = JSON.parse(JSON.stringify(LocalDataFromJSON.JsonData));
     let LocalDataWithItemScreen;
 
     if (inScreenName in LocalDataFromJSONObject[inItemName] === false) {
@@ -317,7 +326,8 @@ let Insert = async ({ inJsonConfig, inItemName, inScreenName, inUserPK }) => {
         });
 
         LocalReturnFromPush = await CommonPushData.AsAsync({
-            inJsonConfig, inUserPK,
+            inJsonConfig,
+            inUserPK: inDataPK,
             inOriginalData: LocalDataFromJSON,
             inDataToUpdate: LocalDataFromJSONObject
         });
