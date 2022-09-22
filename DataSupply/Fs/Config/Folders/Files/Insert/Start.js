@@ -55,11 +55,11 @@ let MockFuncFoldFileItem = async ({ inFolderName, inFileNameWithExtension, inDat
     });
 };
 
-MockFuncFoldFileItem({
-    inFolderName: "Masters", inFileNameWithExtension: "f1.json",
-    inDataPK: 1018
-}).then(p => {
-    console.log("P : ", p.KTF);
-});
+// MockFuncFoldFileItem({
+//     inFolderName: "Masters", inFileNameWithExtension: "f1.json",
+//     inDataPK: 1018
+// }).then(p => {
+//     console.log("P : ", p.KTF);
+// });
 
 module.exports = { InsertNew };

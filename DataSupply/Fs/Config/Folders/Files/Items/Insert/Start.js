@@ -54,11 +54,11 @@ let MockFuncFoldFileItem = async ({ inFolderName, inFileNameWithExtension, inToN
     return await FoldFileItem({ inFolderName, inFileNameWithExtension, inToName, inDataPK });
 };
 
-MockFuncFoldFileItem({
-    inFolderName: "Masters", inFileNameWithExtension: "f1.json",
-    inToName: "Item1", inDataPK: 1018
-}).then(p => {
-    console.log("P : ", p);
-});
+// MockFuncFoldFileItem({
+//     inFolderName: "Masters", inFileNameWithExtension: "f1.json",
+//     inToName: "Item1", inDataPK: 1018
+// }).then(p => {
+//     console.log("P : ", p);
+// });
 
 module.exports = { Insert, FoldFileItem };
