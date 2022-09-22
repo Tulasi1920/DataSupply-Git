@@ -141,4 +141,17 @@ let CreateIfNotPresent = async ({ inToName, inUserPK }) => {
     return [LocalReturnData, LocalRetrunFromConfig];
 };
 
+let MockFuncOnlyFolder = async ({ inToName, inUserPK }) => {
+    return await OnlyFolder({
+        inToName, inUserPK
+    });
+};
+
+// MockFuncOnlyFolder({
+//     inToName: "Masters",
+//     inUserPK: 1016
+// }).then(p => {
+//     console.log("P : ", p);
+// });
+
 module.exports = { OnlyFolder, InsertNew, CreateIfNotPresent };
