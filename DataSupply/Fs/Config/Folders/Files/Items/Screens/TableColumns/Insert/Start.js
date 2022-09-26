@@ -8,12 +8,12 @@ let FixColumnData = ({ inColumnObject }) => {
     inColumnObject.ShowInTable = true;
 };
 
-let Insert = async ({ inJsonConfig, inItemConfig, inColumnName, inUserPK }) => {
+let Insert = async({ inJsonConfig, inItemConfig, inColumnName, inUserPK }) => {
     try {
         let LocalReturnData = { KTF: false, LocalCreateItem: "" };
         let LocalReturnFromPush;
         let LocalNewColumnObject = CommonColumnJsonFuncs.TableColumn();
-        
+
         FixColumnData({ inColumnObject: LocalNewColumnObject });
 
         LocalNewColumnObject.DisplayName = inColumnName;
@@ -27,8 +27,10 @@ let Insert = async ({ inJsonConfig, inItemConfig, inColumnName, inUserPK }) => {
         LocalItemScreenData.TableColumns.push(LocalNewColumnObject);
 
         LocalReturnFromPush = await CommonPushDataAdmin.AsAsync({
-            inJsonConfig, inUserPK,
-            inOriginalData: LocalDisplayData, inDataToUpdate: LocalDisplayDataObject
+            inJsonConfig,
+            inUserPK,
+            inOriginalData: LocalDisplayData,
+            inDataToUpdate: LocalDisplayDataObject
         });
 
         return await LocalReturnFromPush;
@@ -39,4 +41,16 @@ let Insert = async ({ inJsonConfig, inItemConfig, inColumnName, inUserPK }) => {
 
 };
 
+let MockFuncInsert = async({ inJsonConfig, inItemConfig, inColumnName, inUserPK }) => {
+    return await Insert({ inJsonConfig, inItemConfig, inColumnName, inUserPK });
+};
+
+MockFuncInsert({
+    inJsonConfig: { inFolderName: "Masters", inJsonFileName: "f1.json" },
+    inItemName: { inItemName: "item1", inScreenName: "Create" },
+    inColumnName: "Col1",
+    inDataPK: 1016
+}).then(p => {
+    console.log("P : ", p);
+});
 module.exports = { Insert };
